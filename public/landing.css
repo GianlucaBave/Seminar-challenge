@@ -12,9 +12,6 @@ body {
 
 /* Fullscreen Sections */
 .hero-landing,
-.problem-section,
-.how-it-works-section,
-.benefits-section,
 .cta-final-section {
     min-height: 100vh;
     display: flex;
@@ -22,6 +19,20 @@ body {
     justify-content: center;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+}
+
+/* Allow these sections to grow naturally to prevent cutting off content */
+.problem-section,
+.how-it-works-section,
+.benefits-section {
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 0;
+    /* Ensure vertical padding */
+    scroll-snap-align: start;
 }
 
 .hero-landing {
@@ -296,6 +307,25 @@ body {
     margin-top: 3rem;
 }
 
+/* Fullscreen Sections */
+.hero-landing,
+.problem-section,
+.how-it-works-section,
+.benefits-section,
+.cta-final-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding: 2rem 0;
+    /* Minimal padding */
+}
+
+/* Revert specific growing behavior to force slide fit */
+/* Note: We removed the block that set height: auto */
+
 /* Benefits Section */
 .benefits-section {
     background: var(--bg-light);
@@ -303,36 +333,69 @@ body {
 
 .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    /* Force 3 columns on desktop for compactness */
+    gap: 1.5rem;
+    /* Reduced gap from 2.5rem */
+    max-width: 1200px;
+    width: 100%;
 }
 
 .benefit-card {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: 16px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: rgba(30, 41, 59, 0.6);
+    /* Glassmorphism base */
+    backdrop-filter: blur(12px);
+    padding: 1.5rem;
+    /* Reduced padding from 2.5rem */
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    height: 100%;
 }
 
 .benefit-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    /* Reduced movement */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(45, 212, 191, 0.5);
+    /* Primary color glow */
+    background: rgba(30, 41, 59, 0.9);
 }
 
 .benefit-icon {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    /* Smaller icon */
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    background: rgba(56, 189, 248, 0.1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
 }
 
 .benefit-card h3 {
-    font-size: 1.4rem;
-    color: var(--text-dark);
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    /* Smaller title */
+    color: var(--real-white);
+    /* Force pure white */
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .benefit-card p {
-    color: var(--text-light);
-    line-height: 1.7;
+    font-size: 0.9rem;
+    /* Smaller text */
+    color: #cbd5e1;
+    /* Slate-300 - lighter than text-light */
+    line-height: 1.5;
+    margin: 0;
 }
 
 /* Final CTA Section */

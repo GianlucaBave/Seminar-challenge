@@ -516,30 +516,87 @@
 /* Roadmap Styles */
 /* ... existing roadmap styles ... */
 
-/* Interview Teaser Card */
-.interview-teaser-card {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%);
-    border: 1px dashed rgba(255, 255, 255, 0.2);
+/* Interview Banner */
+.interview-banner {
+    background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 2.5rem !important;
+    /* Override standard card padding */
+    position: relative;
+    overflow: hidden;
 }
 
-.badge-soon {
-    display: inline-block;
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
+.interview-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(45, 212, 191, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.banner-text {
+    flex: 1;
+}
+
+.banner-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 0.8rem;
-    letter-spacing: 0.05em;
-    border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
-.interview-teaser-card h3 {
-    font-size: 1.5rem;
-    color: var(--white);
+.banner-icon {
+    font-size: 2rem;
+}
+
+.interview-banner h3 {
+    font-size: 1.8rem;
+    color: var(--real-white);
+    /* Fix: Use pure white for contrast */
     margin: 0;
+}
+
+.interview-banner p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.btn-banner {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(45, 212, 191, 0.2);
+    border-radius: 50px;
+    /* Pillow shape */
+}
+
+@media (max-width: 768px) {
+    .banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .banner-header {
+        justify-content: center;
+    }
+
+    .interview-banner p {
+        margin: 0 auto 1.5rem;
+    }
 }
 
 /* Loading Overlay */
