@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Job Fit Checker - Seminar Challenge</title>
+    <meta name="description" content="Check how well your CV matches a job offer">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/cv-checker.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Seminar Challenge</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/cv-checker.html" class="active">CV Checker</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="cv-checker-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>CV Job Fit Checker</h1>
+                <p class="subtitle">Upload your CV and paste a job offer URL to see how well you match</p>
+            </div>
+
+            <!-- Upload Section -->
+            <section id="upload-section" class="upload-section">
+                <div class="upload-grid">
+                    <!-- CV Upload -->
+                    <div class="upload-card">
+                        <div class="upload-icon">📄</div>
+                        <h3>Upload Your CV/Resume</h3>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="cv-upload" accept=".pdf" hidden>
+                            <label for="cv-upload" class="file-upload-label">
+                                <span class="upload-text">Choose PDF File</span>
+                                <span class="upload-icon-btn">📁</span>
+                            </label>
+                            <div id="file-name" class="file-name"></div>
+                        </div>
+                    </div>
+
+                    <!-- Job URL Input -->
+                    <div class="upload-card">
+                        <div class="upload-icon">🔗</div>
+                        <h3>Job Offer URL</h3>
+                        <div class="url-input-wrapper">
+                            <input type="url" id="job-url" placeholder="https://example.com/job-posting"
+                                class="url-input">
+                            <small class="input-hint">Paste the link to the job posting</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Check Fit Button -->
+                <div class="action-section">
+                    <button id="check-fit-btn" class="btn btn-primary btn-large" disabled>
+                        <span class="btn-text">Check Fit</span>
+                        <span class="btn-icon">🚀</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Results Dashboard (Hidden Initially) -->
+            <section id="results-section" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <h2>Analysis Results</h2>
+                    <button id="reset-btn" class="btn btn-secondary btn-small">New Analysis</button>
+                </div>
+
+                <!-- Overall Score -->
+                <div class="score-card-main">
+                    <div class="score-circle-wrapper">
+                        <svg class="score-circle" viewBox="0 0 200 200">
+                            <circle class="score-circle-bg" cx="100" cy="100" r="90"></circle>
+                            <circle class="score-circle-progress" cx="100" cy="100" r="90" id="score-progress"></circle>
+                        </svg>
+                        <div class="score-value">
+                            <span id="overall-score">0</span>
+                            <span class="score-percent">%</span>
+                        </div>
+                    </div>
+                    <div class="score-info">
+                        <h3>Overall Match Score</h3>
+                        <p id="score-description">Analyzing your fit...</p>
+                    </div>
+                </div>
+
+                <!-- Detailed Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">💼</span>
+                            <h4>Skills Match</h4>
+                        </div>
+                        <div class="metric-bar-wrapper">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill" id="skills-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="metric-value" id="skills-score">0%</span>
+                        </div>
+                        <ul class="metric-details" id="skills-details"></ul>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">🎓</span>
+                            <h4>Experience Match</h4>
+                        </div>
+                        <div class="metric-bar-wrapper">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill" id="experience-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="metric-value" id="experience-score">0%</span>
+                        </div>
+                        <ul class="metric-details" id="experience-details"></ul>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">🔧</span>
+                            <h4>Technical Skills</h4>
+                        </div>
+                        <div class="metric-bar-wrapper">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill" id="technical-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="metric-value" id="technical-score">0%</span>
+                        </div>
+                        <ul class="metric-details" id="technical-details"></ul>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">🌟</span>
+                            <h4>Keywords Match</h4>
+                        </div>
+                        <div class="metric-bar-wrapper">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill" id="keywords-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="metric-value" id="keywords-score">0%</span>
+                        </div>
+                        <ul class="metric-details" id="keywords-details"></ul>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="recommendations-section">
+                    <h3>💡 Recommendations</h3>
+                    <div id="recommendations-list" class="recommendations-list"></div>
+                </div>
+            </section>
+
+            <!-- Loading Overlay -->
+            <div id="loading-overlay" class="loading-overlay" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Analyzing your CV and job offer...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="/cv-checker.js"></script>
+</body>
+
+</html>

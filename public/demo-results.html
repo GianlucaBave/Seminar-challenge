@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Job Fit Results - Demo</title>
+    <meta name="description" content="Demo of CV analysis results">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/cv-checker.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Seminar Challenge</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/cv-checker.html" class="active">CV Checker</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="cv-checker-main">
+        <div class="container">
+            <!-- Results Dashboard -->
+            <section id="results-section" class="results-section">
+                <div class="results-header">
+                    <h2>Analysis Results</h2>
+                    <a href="/cv-checker.html" class="btn btn-secondary btn-small">New Analysis</a>
+                </div>
+
+                <!-- Overall Score -->
+                <div class="score-card-main">
+                    <div class="score-circle-wrapper">
+                        <svg class="score-circle" viewBox="0 0 200 200">
+                            <circle class="score-circle-bg" cx="100" cy="100" r="90"></circle>
+                            <circle class="score-circle-progress" cx="100" cy="100" r="90"
+                                style="stroke-dashoffset: 113.1;"></circle>
+                        </svg>
+                        <div class="score-value">
+                            <span>82</span>
+                            <span class="score-percent">%</span>
+                        </div>
+                    </div>
+                    <div class="score-info">
+                        <h3>Overall Match Score</h3>
+                        <p>Excellent match! You're a strong candidate for this position.</p>
+                    </div>
+                </div>
+
+                <!-- Detailed Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">💼</span>
+                            <h4>Skills Match</h4>
+                        </div>
+                        <div class="metric-bar-wrapper">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="metric-value">85%</span>
+                        </div>
+                        <ul class="metric-details">
+                            <li>Project Management</li>
+                            <li>Team Leadership</li>
+                            <li>Agile Methodologies</li>
+                        </ul>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">🎓</span>
+                            <h4>Experience Match</h4>
+                        </div>
+                        <div class="metric-bar-wrapper">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill" style="width: 78%"></div>
+                            </div>
+                            <span class="metric-value">78%</span>
+                        </div>
+                        <ul class="metric-details">
+                            <li>5+ years in relevant field</li>
+                            <li>Similar industry experience</li>
+                            <li>Leadership roles</li>
+                        </ul>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">🔧</span>
+                            <h4>Technical Skills</h4>
+                        </div>
+                        <div class="metric-bar-wrapper">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill" style="width: 88%"></div>
+                            </div>
+                            <span class="metric-value">88%</span>
+                        </div>
+                        <ul class="metric-details">
+                            <li>JavaScript/Node.js</li>
+                            <li>React/Frontend frameworks</li>
+                            <li>Database management</li>
+                        </ul>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">🌟</span>
+                            <h4>Keywords Match</h4>
+                        </div>
+                        <div class="metric-bar-wrapper">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill" style="width: 79%"></div>
+                            </div>
+                            <span class="metric-value">79%</span>
+                        </div>
+                        <ul class="metric-details">
+                            <li>Strategic planning</li>
+                            <li>Cross-functional collaboration</li>
+                            <li>Data-driven decision making</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="recommendations-section">
+                    <h3>💡 Recommendations</h3>
+                    <div class="recommendations-list">
+                        <div class="recommendation-item">Your CV is well-aligned! Consider tailoring your cover letter
+                            to highlight your top matching skills</div>
+                        <div class="recommendation-item">Emphasize your technical proficiencies more prominently,
+                            especially those matching the job requirements</div>
+                        <div class="recommendation-item">Include more industry-specific keywords from the job posting in
+                            your CV</div>
+                        <div class="recommendation-item">Proofread your CV for any typos or formatting inconsistencies
+                        </div>
+                        <div class="recommendation-item">Consider adding a brief summary section at the top highlighting
+                            your key qualifications</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>
