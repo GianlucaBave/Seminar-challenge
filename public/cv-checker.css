@@ -6,6 +6,20 @@
     background: var(--bg-light);
 }
 
+/* Centered CV Checker for App Page */
+.cv-checker-section-centered {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+    padding: 2rem 0;
+}
+
+.cv-checker-section-centered .container {
+    max-width: 900px;
+}
+
 .upload-section-inline {
     background: var(--white);
     border-radius: 20px;

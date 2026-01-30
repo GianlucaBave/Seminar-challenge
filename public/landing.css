@@ -1,9 +1,32 @@
 /* Landing Page Specific Styles */
 
+/* Smooth Scroll for Fullscreen Sections */
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+/* Fullscreen Sections */
+.hero-landing,
+.problem-section,
+.how-it-works-section,
+.benefits-section,
+.cta-final-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
 .hero-landing {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: var(--white);
-    padding: 8rem 0 6rem;
     position: relative;
     overflow: hidden;
 }
@@ -139,8 +162,14 @@
 
 /* Problem Section */
 .problem-section {
-    padding: 6rem 0;
     background: var(--bg-light);
+}
+
+.problem-section .container,
+.how-it-works-section .container,
+.benefits-section .container {
+    width: 100%;
+    max-width: 1200px;
 }
 
 .problem-grid {
@@ -180,7 +209,6 @@
 
 /* How It Works Section */
 .how-it-works-section {
-    padding: 6rem 0;
     background: var(--white);
 }
 
@@ -255,7 +283,6 @@
 
 /* Benefits Section */
 .benefits-section {
-    padding: 6rem 0;
     background: var(--bg-light);
 }
 
@@ -295,7 +322,6 @@
 
 /* Final CTA Section */
 .cta-final-section {
-    padding: 6rem 0;
     background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     color: var(--white);
     text-align: center;
