@@ -1,231 +1,203 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Job Fit Checker - Seminar Challenge</title>
+    <title>CV Job Fit Checker - Match Your Resume to Any Job</title>
     <meta name="description"
-        content="Check how well your CV matches job offers - Get instant analysis and recommendations">
+        content="Get instant professional-grade analysis of how well your CV matches any job posting. Discover strengths, gaps, and actionable recommendations.">
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/cv-checker.css">
+    <link rel="stylesheet" href="/landing.css">
 </head>
 
 <body>
     <!-- Header -->
     <header>
         <nav class="container">
-            <div class="logo">Seminar Challenge</div>
+            <div class="logo">CV Job Fit</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="/app.html" class="btn-nav">Try It Free</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero-landing">
         <div class="container">
-            <div class="hero-content">
-                <h1>Check Your <span class="highlight">CV Job Fit</span></h1>
-                <p class="hero-subtitle">Upload your CV and paste a job URL to see how well you match</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CV Checker Section -->
-    <section id="cv-checker" class="cv-checker-section">
-        <div class="container">
-            <!-- Upload Section -->
-            <div class="upload-section-inline">
-                <div class="upload-grid">
-                    <!-- CV Upload -->
-                    <div class="upload-card">
-                        <div class="upload-icon">📄</div>
-                        <h3>Upload Your CV/Resume</h3>
-                        <div class="file-upload-wrapper">
-                            <input type="file" id="cv-upload" accept=".pdf" hidden>
-                            <label for="cv-upload" class="file-upload-label">
-                                <span class="upload-text">Choose PDF File</span>
-                                <span class="upload-icon-btn">📁</span>
-                            </label>
-                            <div id="file-name" class="file-name"></div>
-                        </div>
-                    </div>
-
-                    <!-- Job URL Input -->
-                    <div class="upload-card">
-                        <div class="upload-icon">🔗</div>
-                        <h3>Job Offer URL</h3>
-                        <div class="url-input-wrapper">
-                            <input type="url" id="job-url" placeholder="https://example.com/job-posting"
-                                class="url-input">
-                            <small class="input-hint">Paste the link to the job posting</small>
-                        </div>
-                    </div>
+            <div class="hero-content-landing">
+                <div class="hero-badge">✨ Free CV Analysis Tool</div>
+                <h1>Score Your CV.<br><span class="gradient-text">Unlock Your Potential</span></h1>
+                <p class="hero-description">Get an instant, professional-grade score for your CV and discover exactly
+                    where it shines — and where it needs improvement. Our tool analyzes structure, keywords, clarity,
+                    and impact to help you land your dream job.</p>
+                <div class="hero-cta">
+                    <a href="/app.html" class="btn btn-primary btn-hero">Check Your CV Fit Now</a>
+                    <p class="cta-subtext">✓ No sign-up required • ✓ Instant results • ✓ 100% free</p>
                 </div>
-
-                <!-- Check Fit Button -->
-                <div class="action-section">
-                    <button id="check-fit-btn" class="btn btn-primary btn-large" disabled>
-                        <span class="btn-text">Check Fit</span>
-                        <span class="btn-icon">🚀</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Results Dashboard (Hidden Initially) -->
-            <div id="results-section" class="results-section" style="display: none;">
-                <div class="results-header">
-                    <h2>Analysis Results</h2>
-                    <button id="reset-btn" class="btn btn-secondary btn-small">New Analysis</button>
-                </div>
-
-                <!-- Overall Score -->
-                <div class="score-card-main">
-                    <div class="score-circle-wrapper">
-                        <svg class="score-circle" viewBox="0 0 200 200">
-                            <circle class="score-circle-bg" cx="100" cy="100" r="90"></circle>
-                            <circle class="score-circle-progress" cx="100" cy="100" r="90" id="score-progress"></circle>
-                        </svg>
-                        <div class="score-value">
-                            <span id="overall-score">0</span>
-                            <span class="score-percent">%</span>
-                        </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">CVs Analyzed</div>
                     </div>
-                    <div class="score-info">
-                        <h3>Overall Match Score</h3>
-                        <p id="score-description">Analyzing your fit...</p>
+                    <div class="stat-item">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Higher Match Rate</div>
                     </div>
-                </div>
-
-                <!-- Detailed Metrics -->
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-icon">💼</span>
-                            <h4>Skills Match</h4>
-                        </div>
-                        <div class="metric-bar-wrapper">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill" id="skills-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="metric-value" id="skills-score">0%</span>
-                        </div>
-                        <ul class="metric-details" id="skills-details"></ul>
+                    <div class="stat-item">
+                        <div class="stat-number">2 min</div>
+                        <div class="stat-label">Average Time</div>
                     </div>
-
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-icon">🎓</span>
-                            <h4>Experience Match</h4>
-                        </div>
-                        <div class="metric-bar-wrapper">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill" id="experience-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="metric-value" id="experience-score">0%</span>
-                        </div>
-                        <ul class="metric-details" id="experience-details"></ul>
-                    </div>
-
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-icon">🔧</span>
-                            <h4>Technical Skills</h4>
-                        </div>
-                        <div class="metric-bar-wrapper">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill" id="technical-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="metric-value" id="technical-score">0%</span>
-                        </div>
-                        <ul class="metric-details" id="technical-details"></ul>
-                    </div>
-
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-icon">🌟</span>
-                            <h4>Keywords Match</h4>
-                        </div>
-                        <div class="metric-bar-wrapper">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill" id="keywords-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="metric-value" id="keywords-score">0%</span>
-                        </div>
-                        <ul class="metric-details" id="keywords-details"></ul>
-                    </div>
-                </div>
-
-                <!-- Recommendations -->
-                <div class="recommendations-section">
-                    <h3>💡 Recommendations</h3>
-                    <div id="recommendations-list" class="recommendations-list"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="features">
+    <!-- Problem Section -->
+    <section class="problem-section">
         <div class="container">
-            <h2>How It Works</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📤</div>
-                    <h3>1. Upload Your CV</h3>
-                    <p>Upload your resume in PDF format for analysis</p>
+            <div class="section-header-center">
+                <h2>Know Your Score. Land Your Dream Job</h2>
+                <p class="section-subtitle">Stop wondering if your CV is good enough. Get data-driven insights in
+                    minutes.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">❌</div>
+                    <h3>Applying blindly?</h3>
+                    <p>Sending the same CV to every job without knowing how well it matches wastes your time and
+                        opportunities.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔗</div>
-                    <h3>2. Paste Job URL</h3>
-                    <p>Add the link to the job posting you're interested in</p>
+                <div class="problem-card">
+                    <div class="problem-icon">🤔</div>
+                    <h3>Unsure what's missing?</h3>
+                    <p>You know your CV could be better, but you don't know exactly what recruiters are looking for.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>3. Get Insights</h3>
-                    <p>Receive detailed analysis and recommendations</p>
+                <div class="problem-card">
+                    <div class="problem-icon">📉</div>
+                    <h3>Low response rates?</h3>
+                    <p>Getting rejected without feedback leaves you guessing what went wrong and how to improve.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works-section">
         <div class="container">
-            <h2>Contattaci</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" placeholder="Nome" required>
+            <div class="section-header-center">
+                <h2>How It Works</h2>
+                <p class="section-subtitle">Three simple steps to optimize your CV for any job</p>
+            </div>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📄</div>
+                    <h3>Upload Your CV</h3>
+                    <p>Simply upload your resume in PDF format. Our system instantly extracts and analyzes your
+                        information.</p>
                 </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Email" required>
+                <div class="step-arrow">→</div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🔗</div>
+                    <h3>Paste Job URL</h3>
+                    <p>Add the link to any job posting you're interested in. We'll analyze the requirements and
+                        expectations.</p>
                 </div>
-                <div class="form-group">
-                    <textarea placeholder="Messaggio" rows="5" required></textarea>
+                <div class="step-arrow">→</div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">📊</div>
+                    <h3>Get Your Score</h3>
+                    <p>Receive a detailed compatibility score with insights on skills, experience, keywords, and
+                        recommendations.</p>
                 </div>
-                <button type="submit" class="btn btn-primary">Invia Messaggio</button>
-            </form>
+            </div>
+            <div class="cta-center">
+                <a href="/app.html" class="btn btn-primary btn-large">Start Your Free Analysis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits-section">
+        <div class="container">
+            <div class="section-header-center">
+                <h2>Why Use Our CV Job Fit Checker?</h2>
+                <p class="section-subtitle">Powerful features to give you the competitive edge</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Instant Evaluation</h3>
+                    <p>Get your compatibility score in seconds. No waiting, no hassle. Upload, analyze, and improve
+                        immediately.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Clear Feedback</h3>
+                    <p>Understand exactly what works and what doesn't with detailed breakdowns across multiple
+                        dimensions.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💡</div>
+                    <h3>Actionable Recommendations</h3>
+                    <p>Don't just see scores—get specific suggestions on how to improve your CV for each job
+                        application.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <h3>Higher Interview Chances</h3>
+                    <p>Optimize your CV to match job requirements better, increasing your chances of getting that
+                        interview call.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔒</div>
+                    <h3>100% Private</h3>
+                    <p>Your CV data is processed securely and never stored. We respect your privacy completely.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🆓</div>
+                    <h3>Completely Free</h3>
+                    <p>No hidden fees, no subscriptions, no credit card required. Professional CV analysis at zero cost.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-final-section">
+        <div class="container">
+            <div class="cta-final-content">
+                <h2>Ready to Boost Your Job Search?</h2>
+                <p>Join thousands of professionals who have improved their CVs and landed better opportunities</p>
+                <a href="/app.html" class="btn btn-primary btn-hero">Analyze Your CV Now - It's Free</a>
+                <p class="cta-subtext">No registration needed • Results in under 2 minutes</p>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 Seminar Challenge. Tutti i diritti riservati.</p>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="logo">CV Job Fit</div>
+                    <p>Empowering professionals through better CVs</p>
+                </div>
+                <div class="footer-right">
+                    <p>&copy; 2026 CV Job Fit. All rights reserved.</p>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay" style="display: none;">
-        <div class="loading-spinner"></div>
-        <p class="loading-text">Analyzing your CV and job offer...</p>
-    </div>
-
     <script src="/script.js"></script>
-    <script src="/cv-checker.js"></script>
 </body>
 
 </html>
