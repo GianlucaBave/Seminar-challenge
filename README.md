@@ -4,10 +4,11 @@ Landing page moderna per Seminar Challenge, costruita con Node.js ed Express.
 
 ## 🚀 Features
 
+- **CV Job Fit Checker**: Upload your CV/Resume (PDF) and paste a job offer URL to get an instant compatibility score
+- **Smart Dashboard**: Visual analytics with overall score, skills match, experience match, technical skills, and keywords analysis
+- **AI-Powered Recommendations**: Get personalized suggestions to improve your CV for specific job offers
 - Design moderno e responsive
 - Animazioni fluide
-- Sezioni: Hero, Features, About, Contact
-- Ottimizzata per Vercel
 - SEO-friendly
 
 ## 📦 Installazione
