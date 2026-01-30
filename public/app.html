@@ -77,65 +77,108 @@
                     <button id="reset-btn" class="btn btn-secondary btn-small">New Analysis</button>
                 </div>
 
+                <!-- Row 1: Metrics -->
                 <div class="bento-grid">
-                    <!-- 1. Overall Score (Large Card - now Top Left) -->
+                    <!-- 1. Overall Match (Circular) -->
                     <div class="bento-card score-main-card">
-                        <h3>Overall Match (%)</h3>
-                        <div class="score-display-large">
-                            <span id="overall-score">0</span><span class="percent">%</span>
+                        <div class="score-circle-wrapper">
+                            <svg class="score-circle-svg" viewBox="0 0 100 100">
+                                <circle class="score-circle-bg" cx="50" cy="50" r="45"></circle>
+                                <circle id="overall-circle" class="score-circle-progress" cx="50" cy="50" r="45"
+                                    pathLength="100"></circle>
+                            </svg>
+                            <div class="score-center-text">
+                                <span id="overall-score" class="score-value">0</span>
+                                <span class="score-percent">%</span>
+                            </div>
                         </div>
-                        <p id="score-description">Weighted compatibility score</p>
+                        <h3>Overall Match</h3>
                     </div>
 
-                    <!-- 2. Detail Scores (3 Small Cards) -->
+                    <!-- 2. Detail Scores -->
                     <div class="bento-card score-detail-card">
-                        <h4>Experience Match (%)</h4>
-                        <div class="score-display-small">
-                            <span id="experience-score">0</span>%
+                        <div class="detail-header">
+                            <h3>Experience Match</h3>
+                            <span id="experience-score" class="detail-value">0%</span>
                         </div>
-                        <div class="mini-bar">
-                            <div id="experience-bar" class="mini-bar-fill"></div>
-                        </div>
-                    </div>
-
-                    <div class="bento-card score-detail-card">
-                        <h4>Education Match (%)</h4>
-                        <div class="score-display-small">
-                            <span id="education-score">0</span>%
-                        </div>
-                        <div class="mini-bar">
-                            <div id="education-bar" class="mini-bar-fill"></div>
+                        <div class="progress-bar-bg">
+                            <div id="experience-bar" class="progress-bar-fill"></div>
                         </div>
                     </div>
 
                     <div class="bento-card score-detail-card">
-                        <h4>Skills Match (%)</h4>
-                        <div class="score-display-small">
-                            <span id="skills-score">0</span>%
+                        <div class="detail-header">
+                            <h3>Education Match</h3>
+                            <span id="education-score" class="detail-value">0%</span>
                         </div>
-                        <div class="mini-bar">
-                            <div id="skills-bar" class="mini-bar-fill"></div>
+                        <div class="progress-bar-bg">
+                            <div id="education-bar" class="progress-bar-fill"></div>
                         </div>
                     </div>
 
-                    <!-- 3. Strengths -->
-                    <div class="bento-card strengths-card">
-                        <h3>✨ Strengths</h3>
-                        <ul id="strengths-list" class="analysis-list">
-                            <!-- Populated by JS -->
-                        </ul>
-                    </div>
-
-                    <!-- 4. Areas to Improve -->
-                    <div class="bento-card improvements-card">
-                        <h3>🔧 Areas to Improve</h3>
-                        <ul id="improvements-list" class="analysis-list">
-                            <!-- Populated by JS -->
-                        </ul>
+                    <div class="bento-card score-detail-card">
+                        <div class="detail-header">
+                            <h3>Skills Match</h3>
+                            <span id="skills-score" class="detail-value">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="skills-bar" class="progress-bar-fill"></div>
+                        </div>
                     </div>
                 </div>
+                <!-- Row 2: Strengths & Improvements -->
+                <div class="bento-grid">
+                    <div class="bento-card strengths-card">
+                        <div class="score-info">
+                            <h3>✨ Key Strengths</h3>
+                            <ul class="analysis-list" id="strengths-list">
+                                <li>AI analysis loading...</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bento-card improvements-card">
+                        <div class="score-info">
+                            <h3>📉 Areas to Improve</h3>
+                            <ul class="analysis-list" id="improvements-list">
+                                <li>AI analysis loading...</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Career Roadmap (New) -->
+                    <div class="bento-card roadmap-card" style="grid-column: span 4;">
+                        <div class="score-info">
+                            <h3>🚀 3-Month Skill Roadmap</h3>
+                            <div class="roadmap-container" id="roadmap-container">
+                                <!-- Roadmap populated by JS -->
+                                <div class="roadmap-loading">Generating your personalized plan...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 4: AI Interview Teaser (Coming Soon) -->
+                <div class="bento-card interview-teaser-card"
+                    style="grid-column: span 4; margin-top: 1.5rem; position: relative; overflow: hidden;">
+                    <div class="teaser-content"
+                        style="display: flex; align-items: center; justify-content: space-between;">
+                        <div class="teaser-text">
+                            <div class="badge-soon">Coming Soon</div>
+                            <h3>🎤 AI Mock Interview</h3>
+                            <p style="opacity: 0.8; margin-top: 0.5rem; max-width: 600px;">
+                                Practice with our AI interviewer that adapts questions based on your CV gaps. Get
+                                real-time feedback on your answers and readiness score.
+                            </p>
+                        </div>
+                        <div class="teaser-icon" style="font-size: 3rem; opacity: 0.5;">
+                            🤖
+                        </div>
+                    </div>
+                    <!-- Optional: background glow or effect -->
+                    <div class="teaser-glow"></div>
+                </div>
             </div>
-        </div>
     </section>
 
     <!-- How It Works Section -->

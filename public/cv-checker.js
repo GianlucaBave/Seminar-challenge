@@ -142,20 +142,22 @@ resetBtn.addEventListener('click', () => {
 function displayResults(data) {
     // Data structure: { scores: { overall, experience, education, skills }, strengths: [], improvements: [] }
     const { scores, strengths, improvements } = data;
+    // 4. Update UI with results
 
-    // 1. Overall Score
-    const overallEl = document.getElementById('overall-score');
-    animateValue(overallEl, 0, scores.overall, 1500);
+    // 1. Overall Score (Circular Animation)
+    const overallCircle = document.getElementById('overall-circle');
+    const overallText = document.getElementById('overall-score');
 
-    const descEl = document.getElementById('score-description');
-    if (scores.overall >= 80) descEl.textContent = "Excellent match for this role!";
-    else if (scores.overall >= 60) descEl.textContent = "Good potential, needs some tailoring.";
-    else descEl.textContent = "Significant gaps identified.";
+    const offset = 100 - scores.overall;
+    overallCircle.style.strokeDashoffset = offset;
+    animateValue(overallText, 0, scores.overall, 1500);
 
     // 2. Detail Scores
     updateMiniBar('experience', scores.experience);
     updateMiniBar('education', scores.education);
     updateMiniBar('skills', scores.skills);
+
+    // (Description removed as per request)
 
     // 3. Strengths
     const strengthsList = document.getElementById('strengths-list');
@@ -174,6 +176,24 @@ function displayResults(data) {
         li.textContent = item;
         improvementsList.appendChild(li);
     });
+
+    // 5. Roadmap
+    const roadmapContainer = document.getElementById('roadmap-container');
+    if (data.roadmap && Array.isArray(data.roadmap)) {
+        roadmapContainer.innerHTML = ''; // Clear loading text
+        data.roadmap.forEach(step => {
+            const stepDiv = document.createElement('div');
+            stepDiv.className = 'roadmap-step';
+            stepDiv.innerHTML = `
+                <div class="step-month">${step.month}</div>
+                <div class="step-title">${step.title}</div>
+                <div class="step-action">${step.action}</div>
+            `;
+            roadmapContainer.appendChild(stepDiv);
+        });
+    } else {
+        roadmapContainer.innerHTML = '<div class="roadmap-loading">No roadmap available.</div>';
+    }
 }
 
 function updateMiniBar(idPrefix, value) {

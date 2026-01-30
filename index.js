@@ -53,12 +53,12 @@ app.post('/api/analyze-cv', upload.single('cv'), async (req, res) => {
         4. **Skills Match (%)**: Measures match of explicitly required hard and soft skills.
 
         **Feedback Sections**:
-        - **Strengths**: Dedicated section for what works well.
-           - Rules: Only directly related to job description. Max 3-4 points. Clear, non-judgmental.
-           - Purpose: Reinforce confidence.
-        - **Areas to Improve**: Explains what limits the score.
-           - Rules: Relate to lower score. No personal judgments. Max 3 points. Focus on gaps (e.g. missing tools, insufficient years).
-           - Purpose: Explain match score limit and provide actionable direction.
+        - **Strengths**: Dedicated section for what works well. (Max 3-4 points)
+        - **Areas to Improve**: Explains what limits the score. (Max 3 points)
+        - **Roadmap**: A 3-step monthly plan to improve the profile.
+            - Month 1: Foundations (Quick wins, basics).
+            - Month 2: Application (Projects, advanced concepts).
+            - Month 3: Mastery (Certification, complex contributions).
 
         **Output Rules**:
         - Scores must be explainable.
@@ -74,7 +74,12 @@ app.post('/api/analyze-cv', upload.single('cv'), async (req, res) => {
                 "skills": number (0-100)
             },
             "strengths": ["string", "string", ...],
-            "improvements": ["string", "string", ...]
+            "improvements": ["string", "string", ...],
+            "roadmap": [
+                { "month": "Month 1", "title": "Foundations", "action": "string" },
+                { "month": "Month 2", "title": "Application", "action": "string" },
+                { "month": "Month 3", "title": "Mastery", "action": "string" }
+            ]
         }
         `;
 

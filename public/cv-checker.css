@@ -31,9 +31,11 @@
 .cv-checker-main {
     min-height: 100vh;
     padding: 2rem 0 4rem;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: transparent;
+    /* Use body background */
 }
 
+/* Restored Upload Section Styles */
 .page-header {
     text-align: center;
     margin-bottom: 3rem;
@@ -138,7 +140,10 @@
 .url-input {
     width: 100%;
     padding: 1rem 1.5rem;
-    border: 2px solid #e5e7eb;
+    border: 2px solid #334155;
+    /* Slate-700 */
+    background: var(--bg-light);
+    color: var(--text-dark);
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s;
@@ -223,18 +228,78 @@
 /* Overall Score Card (Span 2 cols, 2 rows? Or simpler) */
 /* Let's make Overall Score large: Top Left */
 /* Overall Score Card (Main) */
+/* Overall Score Card (Main) */
 .score-main-card {
     grid-column: span 1;
-    /* Now just 1 column wide */
     grid-row: span 1;
-    /* Now just 1 row high */
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    color: var(--white);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.2) 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.score-main-card h3 {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+/* Circular Loader */
+.score-circle-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.score-circle-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.score-circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.score-circle-progress {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 1.5s ease-out;
+}
+
+.score-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.score-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    /* Pure white for contrast */
+    line-height: 1;
+}
+
+.score-percent {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 2px;
 }
 
 /* Detail Cards */
@@ -243,6 +308,43 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 0.8rem;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-header h3 {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    /* Slate-400 */
+    font-weight: 500;
+}
+
+.detail-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    /* Pure white for contrast */
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--secondary-color);
+    width: 0%;
+    border-radius: 4px;
+    transition: width 1s ease-out;
 }
 
 /* Strengths & Improvements (Bottom Row) */
@@ -307,6 +409,137 @@
     .improvements-card {
         grid-column: span 2;
     }
+}
+
+/* Roadmap Styles */
+.roadmap-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    position: relative;
+    padding-top: 1rem;
+}
+
+.roadmap-step {
+    flex: 1;
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 12px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Connecting Line */
+.roadmap-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 4px;
+    opacity: 0.3;
+}
+
+.roadmap-step::before {
+    content: '';
+    position: absolute;
+    top: -1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: 3px solid var(--bg-dark);
+    /* Match card bg */
+    z-index: 1;
+}
+
+.step-month {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.step-title {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.step-action {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.roadmap-loading {
+    text-align: center;
+    color: var(--text-light);
+    width: 100%;
+    font-style: italic;
+}
+
+/* Responsive Roadmap */
+@media (max-width: 768px) {
+    .roadmap-container {
+        flex-direction: column;
+        gap: 2rem;
+        padding-top: 0;
+        padding-left: 1.5rem;
+    }
+
+    /* Vertical Line for Mobile */
+    .roadmap-container::before {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: auto;
+        width: 4px;
+        height: auto;
+    }
+
+    .roadmap-step::before {
+        top: 50%;
+        left: -1.7rem;
+        transform: translateY(-50%);
+    }
+}
+
+/* Roadmap Styles */
+/* ... existing roadmap styles ... */
+
+/* Interview Teaser Card */
+.interview-teaser-card {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.badge-soon {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.interview-teaser-card h3 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin: 0;
 }
 
 /* Loading Overlay */
