@@ -66,8 +66,8 @@ nav {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: var(--white);
+    background: linear-gradient(135deg, #3b82f6 0%, #e0f2fe 100%);
+    color: var(--text-dark);
     padding: 8rem 0;
     text-align: center;
 }
@@ -79,7 +79,7 @@ nav {
 }
 
 .highlight {
-    color: #fbbf24;
+    color: #1e40af;
 }
 
 .hero-subtitle {
@@ -255,6 +255,7 @@ footer {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
