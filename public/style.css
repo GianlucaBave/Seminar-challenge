@@ -26,11 +26,14 @@ body {
 }
 
 /* Header */
+/* Header */
 header {
-    background: var(--white);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    background: transparent;
+    box-shadow: none;
+    position: absolute;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
 }
 
@@ -42,9 +45,19 @@ nav {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--primary-color);
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    border-radius: 8px;
+    /* Optional: smooth corners if square */
 }
 
 .nav-links {

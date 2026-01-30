@@ -15,7 +15,13 @@
     <!-- Header -->
     <header>
         <nav class="container">
-            <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">North</a></div>
+            <div class="logo">
+                <a href="/"
+                    style="display: flex; align-items: center; gap: 0.5rem; color: inherit; text-decoration: none;">
+                    <img src="/logo.png" alt="North Logo">
+                    North
+                </a>
+            </div>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/#how-it-works">How It Works</a></li>
@@ -28,7 +34,7 @@
     <section id="cv-checker" class="cv-checker-section-centered">
         <div class="container">
             <!-- Upload Section -->
-            <div class="upload-section-inline">
+            <div id="upload-section" class="upload-section-inline">
                 <div class="upload-grid">
                     <!-- CV Upload -->
                     <div class="upload-card">
@@ -65,94 +71,69 @@
                 </div>
             </div>
 
-            <!-- Results Dashboard (Hidden Initially) -->
-            <div id="results-section" class="results-section" style="display: none;">
-                <div class="results-header">
+            <!-- Results Dashboard (Single Screen Layout) -->
+            <div id="results-section" class="results-dashboard" style="display: none;">
+                <div class="dashboard-header">
                     <h2>Analysis Results</h2>
                     <button id="reset-btn" class="btn btn-secondary btn-small">New Analysis</button>
                 </div>
 
-                <!-- Overall Score -->
-                <div class="score-card-main">
-                    <div class="score-circle-wrapper">
-                        <svg class="score-circle" viewBox="0 0 200 200">
-                            <circle class="score-circle-bg" cx="100" cy="100" r="90"></circle>
-                            <circle class="score-circle-progress" cx="100" cy="100" r="90" id="score-progress"></circle>
-                        </svg>
-                        <div class="score-value">
-                            <span id="overall-score">0</span>
-                            <span class="score-percent">%</span>
+                <div class="bento-grid">
+                    <!-- 1. Overall Score (Large Card - now Top Left) -->
+                    <div class="bento-card score-main-card">
+                        <h3>Overall Match (%)</h3>
+                        <div class="score-display-large">
+                            <span id="overall-score">0</span><span class="percent">%</span>
                         </div>
-                    </div>
-                    <div class="score-info">
-                        <h3>Overall Match Score</h3>
-                        <p id="score-description">Analyzing your fit...</p>
-                    </div>
-                </div>
-
-                <!-- Detailed Metrics -->
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-icon">💼</span>
-                            <h4>Skills Match</h4>
-                        </div>
-                        <div class="metric-bar-wrapper">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill" id="skills-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="metric-value" id="skills-score">0%</span>
-                        </div>
-                        <ul class="metric-details" id="skills-details"></ul>
+                        <p id="score-description">Weighted compatibility score</p>
                     </div>
 
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-icon">🎓</span>
-                            <h4>Experience Match</h4>
+                    <!-- 2. Detail Scores (3 Small Cards) -->
+                    <div class="bento-card score-detail-card">
+                        <h4>Experience Match (%)</h4>
+                        <div class="score-display-small">
+                            <span id="experience-score">0</span>%
                         </div>
-                        <div class="metric-bar-wrapper">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill" id="experience-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="metric-value" id="experience-score">0%</span>
+                        <div class="mini-bar">
+                            <div id="experience-bar" class="mini-bar-fill"></div>
                         </div>
-                        <ul class="metric-details" id="experience-details"></ul>
                     </div>
 
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-icon">🔧</span>
-                            <h4>Technical Skills</h4>
+                    <div class="bento-card score-detail-card">
+                        <h4>Education Match (%)</h4>
+                        <div class="score-display-small">
+                            <span id="education-score">0</span>%
                         </div>
-                        <div class="metric-bar-wrapper">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill" id="technical-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="metric-value" id="technical-score">0%</span>
+                        <div class="mini-bar">
+                            <div id="education-bar" class="mini-bar-fill"></div>
                         </div>
-                        <ul class="metric-details" id="technical-details"></ul>
                     </div>
 
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-icon">🌟</span>
-                            <h4>Keywords Match</h4>
+                    <div class="bento-card score-detail-card">
+                        <h4>Skills Match (%)</h4>
+                        <div class="score-display-small">
+                            <span id="skills-score">0</span>%
                         </div>
-                        <div class="metric-bar-wrapper">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill" id="keywords-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="metric-value" id="keywords-score">0%</span>
+                        <div class="mini-bar">
+                            <div id="skills-bar" class="mini-bar-fill"></div>
                         </div>
-                        <ul class="metric-details" id="keywords-details"></ul>
                     </div>
-                </div>
 
-                <!-- Recommendations -->
-                <div class="recommendations-section">
-                    <h3>💡 Recommendations</h3>
-                    <div id="recommendations-list" class="recommendations-list"></div>
+                    <!-- 3. Strengths -->
+                    <div class="bento-card strengths-card">
+                        <h3>✨ Strengths</h3>
+                        <ul id="strengths-list" class="analysis-list">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+
+                    <!-- 4. Areas to Improve -->
+                    <div class="bento-card improvements-card">
+                        <h3>🔧 Areas to Improve</h3>
+                        <ul id="improvements-list" class="analysis-list">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

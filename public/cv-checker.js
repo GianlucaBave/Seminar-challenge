@@ -58,19 +58,66 @@ function isValidUrl(string) {
 checkFitBtn.addEventListener('click', async () => {
     // Show loading
     loadingOverlay.style.display = 'flex';
+    document.querySelector('.loading-text').textContent = "Analyzing your CV against the job description...";
 
-    // Simulate API call (replace with actual backend call)
-    await simulateAnalysis();
+    try {
+        const formData = new FormData();
+        formData.append('cv', uploadedFile);
+        formData.append('jobUrl', jobUrl);
 
-    // Hide loading
-    loadingOverlay.style.display = 'none';
+        const response = await fetch('/api/analyze-cv', {
+            method: 'POST',
+            body: formData
+        });
 
-    // Show results
-    uploadSection.style.display = 'none';
-    resultsSection.style.display = 'block';
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ error: response.statusText }));
+            throw new Error(errorData.details || errorData.error || 'Unknown Server Error');
+        }
 
-    // Scroll to results
-    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const data = await response.json();
+
+        // Hide loading
+        loadingOverlay.style.display = 'none';
+
+        // Show results
+        uploadSection.style.display = 'none';
+        resultsSection.style.display = 'block';
+
+        // Display Data
+        displayResults(data);
+
+        // Scroll to results
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (error) {
+        console.error('Error:', error);
+        loadingOverlay.style.display = 'none';
+
+        // Show detailed error in UI
+        let errorMsg = error.message;
+        if (error.response) {
+            // If we have response details (from a fetch wrapper if we had one, but here we process raw fetch)
+        }
+
+        const errorDiv = document.createElement('div');
+        errorDiv.style.backgroundColor = '#fee2e2';
+        errorDiv.style.border = '1px solid #ef4444';
+        errorDiv.style.color = '#b91c1c';
+        errorDiv.style.padding = '1rem';
+        errorDiv.style.borderRadius = '8px';
+        errorDiv.style.marginTop = '1rem';
+        errorDiv.style.fontFamily = 'monospace';
+        errorDiv.style.whiteSpace = 'pre-wrap';
+        errorDiv.innerHTML = `<strong>Error Analysis Failed:</strong><br>${errorMsg}`;
+
+        // Remove existing error if any
+        const existingError = uploadSection.querySelector('.error-box');
+        if (existingError) existingError.remove();
+
+        errorDiv.className = 'error-box';
+        document.querySelector('.action-section').appendChild(errorDiv);
+    }
 });
 
 // Reset Button Handler
@@ -91,153 +138,70 @@ resetBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Simulate Analysis (Replace with actual API call)
-async function simulateAnalysis() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            // Generate mock scores
-            const scores = {
-                overall: Math.floor(Math.random() * 30) + 65, // 65-95
-                skills: Math.floor(Math.random() * 25) + 70,
-                experience: Math.floor(Math.random() * 25) + 65,
-                technical: Math.floor(Math.random() * 30) + 60,
-                keywords: Math.floor(Math.random() * 20) + 75
-            };
-
-            displayResults(scores);
-            resolve();
-        }, 2500);
-    });
-}
-
 // Display Results
-function displayResults(scores) {
-    // Overall Score
-    const overallScore = document.getElementById('overall-score');
-    const scoreProgress = document.getElementById('score-progress');
-    const scoreDescription = document.getElementById('score-description');
+function displayResults(data) {
+    // Data structure: { scores: { overall, experience, education, skills }, strengths: [], improvements: [] }
+    const { scores, strengths, improvements } = data;
 
-    // Animate overall score
-    animateValue(overallScore, 0, scores.overall, 1500);
+    // 1. Overall Score
+    const overallEl = document.getElementById('overall-score');
+    animateValue(overallEl, 0, scores.overall, 1500);
 
-    // Animate circle
-    const circumference = 2 * Math.PI * 90;
-    const offset = circumference - (scores.overall / 100) * circumference;
-    scoreProgress.style.strokeDashoffset = offset;
+    const descEl = document.getElementById('score-description');
+    if (scores.overall >= 80) descEl.textContent = "Excellent match for this role!";
+    else if (scores.overall >= 60) descEl.textContent = "Good potential, needs some tailoring.";
+    else descEl.textContent = "Significant gaps identified.";
 
-    // Score description
-    if (scores.overall >= 80) {
-        scoreDescription.textContent = 'Excellent match! You\'re a strong candidate for this position.';
-    } else if (scores.overall >= 65) {
-        scoreDescription.textContent = 'Good match! Consider highlighting relevant skills.';
-    } else {
-        scoreDescription.textContent = 'Moderate match. Review recommendations below.';
-    }
+    // 2. Detail Scores
+    updateMiniBar('experience', scores.experience);
+    updateMiniBar('education', scores.education);
+    updateMiniBar('skills', scores.skills);
 
-    // Individual Metrics
-    updateMetric('skills', scores.skills, [
-        'Project Management',
-        'Team Leadership',
-        'Agile Methodologies'
-    ]);
+    // 3. Strengths
+    const strengthsList = document.getElementById('strengths-list');
+    strengthsList.innerHTML = '';
+    (strengths || []).forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        strengthsList.appendChild(li);
+    });
 
-    updateMetric('experience', scores.experience, [
-        '5+ years in relevant field',
-        'Similar industry experience',
-        'Leadership roles'
-    ]);
-
-    updateMetric('technical', scores.technical, [
-        'JavaScript/Node.js',
-        'React/Frontend frameworks',
-        'Database management'
-    ]);
-
-    updateMetric('keywords', scores.keywords, [
-        'Strategic planning',
-        'Cross-functional collaboration',
-        'Data-driven decision making'
-    ]);
-
-    // Recommendations
-    displayRecommendations(scores);
+    // 4. Improvements
+    const improvementsList = document.getElementById('improvements-list');
+    improvementsList.innerHTML = '';
+    (improvements || []).forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        improvementsList.appendChild(li);
+    });
 }
 
-// Update Individual Metric
-function updateMetric(metricName, score, details) {
-    const bar = document.getElementById(`${metricName}-bar`);
-    const scoreElement = document.getElementById(`${metricName}-score`);
-    const detailsList = document.getElementById(`${metricName}-details`);
+function updateMiniBar(idPrefix, value) {
+    const scoreEl = document.getElementById(`${idPrefix}-score`);
+    const barEl = document.getElementById(`${idPrefix}-bar`);
 
-    // Animate bar
+    animateValue(scoreEl, 0, value, 1000);
     setTimeout(() => {
-        bar.style.width = `${score}%`;
-    }, 300);
-
-    // Animate score
-    animateValue(scoreElement, 0, score, 1000, '%');
-
-    // Add details
-    detailsList.innerHTML = '';
-    details.forEach(detail => {
-        const li = document.createElement('li');
-        li.textContent = detail;
-        detailsList.appendChild(li);
-    });
+        barEl.style.width = `${value}%`;
+    }, 100);
 }
 
 // Animate Number Value
-function animateValue(element, start, end, duration, suffix = '') {
+function animateValue(element, start, end, duration) {
+    if (!element) return;
     const range = end - start;
-    const increment = range / (duration / 16);
-    let current = start;
+    const startTime = new Date().getTime();
+    const endTime = startTime + duration;
 
     const timer = setInterval(() => {
-        current += increment;
-        if (current >= end) {
-            current = end;
+        const now = new Date().getTime();
+        const remaining = Math.max((endTime - now) / duration, 0);
+        const value = Math.round(end - (remaining * range));
+        element.textContent = value;
+        if (value == end) {
             clearInterval(timer);
         }
-        element.textContent = Math.floor(current) + suffix;
     }, 16);
-}
-
-// Display Recommendations
-function displayRecommendations(scores) {
-    const recommendationsList = document.getElementById('recommendations-list');
-    recommendationsList.innerHTML = '';
-
-    const recommendations = [];
-
-    if (scores.skills < 75) {
-        recommendations.push('Consider adding more relevant skills mentioned in the job description to your CV');
-    }
-
-    if (scores.technical < 70) {
-        recommendations.push('Highlight your technical proficiencies more prominently, especially those matching the job requirements');
-    }
-
-    if (scores.experience < 70) {
-        recommendations.push('Emphasize your relevant work experience and quantify your achievements');
-    }
-
-    if (scores.keywords < 80) {
-        recommendations.push('Include more industry-specific keywords from the job posting in your CV');
-    }
-
-    if (scores.overall >= 80) {
-        recommendations.push('Your CV is well-aligned! Consider tailoring your cover letter to highlight your top matching skills');
-    }
-
-    recommendations.push('Proofread your CV for any typos or formatting inconsistencies');
-    recommendations.push('Consider adding a brief summary section at the top highlighting your key qualifications');
-
-    recommendations.forEach(rec => {
-        const div = document.createElement('div');
-        div.className = 'recommendation-item';
-        div.textContent = rec;
-        recommendationsList.appendChild(div);
-    });
 }
 
 // Initialize
