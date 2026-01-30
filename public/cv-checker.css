@@ -1,5 +1,19 @@
 /* CV Checker Specific Styles */
 
+/* CV Checker Section on Landing Page */
+.cv-checker-section {
+    padding: 4rem 0;
+    background: var(--bg-light);
+}
+
+.upload-section-inline {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+}
+
 .cv-checker-main {
     min-height: 100vh;
     padding: 2rem 0 4rem;
