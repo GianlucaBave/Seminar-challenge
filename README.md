@@ -1,65 +1,68 @@
-# Seminar Challenge
+# CV Job Fit Checker
 
-Landing page moderna per Seminar Challenge, costruita con Node.js ed Express.
+**Live demo: [seminar-challenge.vercel.app](https://seminar-challenge.vercel.app)**
+
+Upload a CV, paste a job-offer URL, and get a compatibility score with AI suggestions to tailor the CV. Built for the ESADE Seminar Challenge with Node.js, Express and the Gemini API.
 
 ## 🚀 Features
 
 - **CV Job Fit Checker**: Upload your CV/Resume (PDF) and paste a job offer URL to get an instant compatibility score
 - **Smart Dashboard**: Visual analytics with overall score, skills match, experience match, technical skills, and keywords analysis
 - **AI-Powered Recommendations**: Get personalized suggestions to improve your CV for specific job offers
-- Design moderno e responsive
-- Animazioni fluide
+- Responsive design
+- Smooth animations
 - SEO-friendly
 
-## 📦 Installazione
+## 📦 Installation
 
 ```bash
 npm install
 ```
 
-## 🏃 Esecuzione Locale
+## 🏃 Run locally
 
 ```bash
 npm start
 ```
 
-Il sito sarà disponibile su `http://localhost:3000`
+The site runs at `http://localhost:3000`.
 
-## 🌐 Deploy su Vercel
+## 🌐 Deploy on Vercel
 
-### Metodo 1: CLI Vercel
+### Option 1: Vercel CLI
 ```bash
 npm install -g vercel
 vercel
 ```
 
-### Metodo 2: GitHub Integration
-1. Vai su [vercel.com](https://vercel.com)
-2. Importa questo repository
-3. Vercel rileverà automaticamente la configurazione
-4. Clicca su "Deploy"
+### Option 2: GitHub integration
+1. Go to [vercel.com](https://vercel.com)
+2. Import this repository
+3. Vercel detects the configuration automatically
+4. Click "Deploy"
 
-## 📁 Struttura Progetto
+## 📁 Project structure
 
 ```
 .
-├── index.js          # Server Express
-├── package.json      # Dipendenze
-├── vercel.json       # Configurazione Vercel
-└── public/           # File statici
+├── index.js          # Express server
+├── package.json      # Dependencies
+├── vercel.json       # Vercel configuration
+└── public/           # Static files
     ├── index.html    # Landing page
-    ├── style.css     # Stili
+    ├── style.css     # Styles
     └── script.js     # JavaScript
 ```
 
-## 🛠️ Tecnologie
+## 🛠️ Tech stack
 
 - Node.js
 - Express
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
+- Gemini API, pdf-parse, Multer
 
-## 📄 Licenza
+## 📄 License
 
 MIT
