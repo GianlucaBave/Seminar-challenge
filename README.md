@@ -2,7 +2,7 @@
 
 **Live demo: [seminar-challenge.vercel.app](https://seminar-challenge.vercel.app)**
 
-Upload a CV, paste a job-offer URL, and get a compatibility score with AI suggestions to tailor the CV. Built for the ESADE Seminar Challenge with Node.js, Express and the Gemini API.
+Upload a CV, paste a job-offer URL, and get a compatibility score with AI suggestions to tailor the CV. Built with Node.js, Express and the Gemini API.
 
 ## 🚀 Features
 
